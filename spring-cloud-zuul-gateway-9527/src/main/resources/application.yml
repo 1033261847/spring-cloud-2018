@@ -1,0 +1,40 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: zxzuul-9527
+
+zuul:
+  ignored-services: springcloud-dept #微服务名 不能访问
+  routes:
+    mydept.serviceId: springcloud-dept
+    mydept.path:  /mydept/**
+
+eureka:
+  client: #客户端注册进eureka服务列表内
+    service-url:
+      #defaultZone: http://localhost:7001/eureka
+      defaultZone: http://www.zx7001.com:7001/eureka,http://www.zx7002.com:7002/eureka
+  instance:
+    instance-id: www.zxzuul.com #自定义hystrix相关服务器的名字
+    prefer-ip-address: true
+
+info:
+  app.name: zx
+  company.name: com.zx
+  build.artifactId: ${project.artifactId}
+  build.version: ${project.version}
+
+
+#暴露全部的监控信息
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+
+
+
